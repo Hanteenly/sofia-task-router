@@ -1,8 +1,8 @@
 from sofia.models.task import Task
 from sofia.router.router import Router
 
-if __name__ == "__main__":
-    
+
+def main():
     router = Router()
     
     task1 = Task(
@@ -40,3 +40,6 @@ if __name__ == "__main__":
     print(task3.task_id, "->", router.route(task3, ["cloud"]))
 
     print(router.audit.records)
+
+if __name__ == "__main__":
+    main()
