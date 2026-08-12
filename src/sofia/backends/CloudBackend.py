@@ -24,14 +24,17 @@ class CloudBackend(Backend):
                         word_end = word
                     else:
                         result_words[word] = 1
-                    
-                for word in result_words:
-                    if result_words[word] > result_words[word_end]:
-                        word_end = word
-                                
-                for sentence in sentences:
-                    if word_end is not None and word_end in sentence:
-                        result_sentences.append(sentence)
+
+                if word_end is None:
+                    return task.payload.get("text")
+                else:
+                    for word in result_words:
+                        if result_words[word] > result_words[word_end]:
+                            word_end = word
+                        
+                    for sentence in sentences:
+                        if word_end is not None and word_end in sentence:
+                            result_sentences.append(sentence)
         
                 return result_sentences
         else:

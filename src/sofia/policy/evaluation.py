@@ -1,14 +1,24 @@
 
 class Policy:
     def evaluate(self, task):
+        
+        valid_risk_classes = {"read-safe", "write-risk", "high-stakes"}
+        valid_data_sensitivities = {"public", "internal", "restricted", "sealed"}
 
-        if task.requires_human_approval == True:
+        if task.risk_class not in valid_risk_classes:
+            return "invalid-task"
+
+        if task.data_sensitivity not in valid_data_sensitivities:
+            return "invalid-task"
+
+        if task.requires_human_approval:
             return "approval-required"
-        elif task.risk_class == "write-risk" or task.risk_class == "high-stakes":
+
+        if task.risk_class in {"write-risk", "high-stakes"}:
             return "approval-required"
-        elif task.data_sensitivity == "restricted" or task.data_sensitivity == "sealed":
+
+        if task.data_sensitivity in {"restricted", "sealed"}:
             return "cloud forbidden"
-        else:
-            return "execution allowed"
 
-
+        return "execution allowed"
+    

@@ -122,4 +122,31 @@ def test_backend_switching():
     assert router.route(task1, ["local"]) == local.execute(task1)
     assert router.route(task2, ["cloud"]) == cloud.execute(task2)
     assert router.route(task3, ["mock"]) == mock.execute(task3)
-    
+
+def test_cloud_no_repeated_words():
+    task = Task(
+        task_id="task",
+        intent="summarize",
+        data_sensitivity="internal",
+        risk_class="read-safe",
+        allowed_backends=["cloud"],
+        requires_human_approval=False,
+        payload={"text": "Example document content. Somethink is good"}
+    )
+    router = Router()
+    assert router.route(task, ["cloud"]) == "Example document content. Somethink is good"
+
+def test_invalid_risk_class():
+    task = Task(
+        task_id="task",
+        intent="summarize",
+        data_sensitivity="internal",
+        risk_class="unknown-risk",
+        allowed_backends=["local"],
+        requires_human_approval=False,
+        payload={"text": "Example document content"}
+    )
+
+    router = Router()
+
+    assert router.route(task, ["local"]) == "invalid-task"

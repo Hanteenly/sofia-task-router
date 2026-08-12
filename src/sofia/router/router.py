@@ -19,7 +19,8 @@ class Router:
         if policy_result == "approval-required":
             self.audit.log(task, "approval-required", None, policy_result, "blocked", None)
             return "no-backend"
-
+        elif policy_result == "invalid-task":
+            return "invalid-task"
         elif policy_result == "cloud forbidden":
             cloud_block = True
 
