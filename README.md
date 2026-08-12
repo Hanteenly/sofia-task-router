@@ -69,7 +69,7 @@ policy_decision, execution_status, error_or_limitation) — saves a detailed rec
 * test_backend_switching() — verifies that the router can switch between local, cloud, and mock backends according to the allowed backend rules.
 
 ## Project Structure
-
+```text
 sofia-task-router/
 ├── src/
 │   └── sofia/
@@ -101,7 +101,7 @@ sofia-task-router/
 ├── pyproject.toml
 ├── uv.lock
 └── README.md
-
+````mdgi
 ## How to Run
 
 uv run python src/sofia/main.py
