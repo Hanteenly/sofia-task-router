@@ -101,7 +101,7 @@ sofia-task-router/
 ├── pyproject.toml
 ├── uv.lock
 └── README.md
-```text
+```
 
 ## How to Run
 
