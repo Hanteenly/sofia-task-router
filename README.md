@@ -101,7 +101,8 @@ sofia-task-router/
 ├── pyproject.toml
 ├── uv.lock
 └── README.md
-````mdgi
+```text
+
 ## How to Run
 
 uv run python src/sofia/main.py
